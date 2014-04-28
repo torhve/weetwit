@@ -91,7 +91,7 @@ class Twitter(object):
     def get_followed(self):
         """Returns an array of screen_names that you follow."""
         try:
-            followed = [u.screen_name for u in self.api.friends()]
+            followed = [u.screen_name for u in self.api.friends(count=200)]
         except TweepError as error:
             raise TwitterError("Faled to get followed: %s" % error)
         return followed

@@ -193,16 +193,14 @@ def display_cb(data, remaining_calls):
                     screen_name = cur_color + screen_name
                     text = cur_color + text
 
-                mention_color = wc.color(wc.config_get_plugin("mention_color"))
                 hash_color = wc.color(wc.config_get_plugin("hash_color"))
-                text = re.sub(r'(?P<name>@\w+)', r"{}\1{}".format(mention_color,text_color), text)
                 text = re.sub(r'(?P<hash>#\w+)', r"{}\1{}".format(hash_color,text_color), text)
 
                 retweet_style = wc.config_get_plugin("rt_style")
 
                 output =""
                 if tweet.is_retweet:
-                    retweeter = "%s@%s" % (mention_color, tweet.rtscreen_name)
+                    retweeter = "@%s" % (tweet.rtscreen_name)
                     if retweet_style == 'postfix':
                         output = '%s\t%s%s (RT by %s%s)' % (screen_name,
                                                             text_color,
@@ -699,7 +697,6 @@ if wc.register(SCRIPT_NAME, SCRIPT_AUTHOR, SCRIPT_VERSION, SCRIPT_LICENSE,
             "trend_woeid" : "1",
             "nick_color" : "blue",
             "hash_color" : "red",
-            "mention_color" : "blue",
             "rt_style" : "postfix",
             "expand_urls" : "true",
     }

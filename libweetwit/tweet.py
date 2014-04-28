@@ -74,7 +74,7 @@ class Tweet(Status):
 
         for url in url_list:
             try:
-                replacement = "%s [%s]" % (url['display_url'], url['url'])
+                replacement = "%s %s" % (url['display_url'], url['url'])
                 text = text.replace(url['url'], replacement)
             except (TypeError, KeyError):
                 pass

@@ -202,7 +202,7 @@ def display_cb(data, remaining_calls):
 
                 output =""
                 if tweet.is_retweet:
-                    retweeter = "@%s" % (tweet.rtscreen_name)
+                    retweeter = "%s" % (tweet.rtscreen_name)
                     if retweet_style == 'postfix':
                         output = '%s\t%s%s (RT by %s%s)' % (screen_name,
                                                             text_color,
@@ -210,7 +210,7 @@ def display_cb(data, remaining_calls):
                                                             retweeter,
                                                             text_color)
                     else:
-                        output = "%s\tRT %s%s %s" % (retweeter,
+                        output = "%s\tRT <%s> %s%s" % (retweeter,
                                                      screen_name,
                                                      text_color,
                                                      text)

@@ -202,7 +202,8 @@ def display_cb(data, remaining_calls):
 
                 output =""
                 if tweet.is_retweet:
-                    retweeter = "%s" % (tweet.rtscreen_name)
+                    nick_color = wc.info_get("irc_nick_color", tweet.rtscreen_name)
+                    retweeter = "%s%s" % (nick_color, tweet.rtscreen_name)
                     if retweet_style == 'postfix':
                         output = '%s\t%s%s (RT by %s%s)' % (screen_name,
                                                             text_color,

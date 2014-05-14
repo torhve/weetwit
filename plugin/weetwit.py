@@ -639,6 +639,9 @@ def setup_timeline(timelined, followed=False, search=False):
     # Some naming
     wc.buffer_set(buf, "title", title)
     wc.buffer_set(buf, "short_name", short_name)
+    wc.buffer_set(buf, "localvar_set_server", "twitter")
+    wc.buffer_set(buf, "localvar_set_channel", name)
+    wc.buffer_set(buf, "localvar_set_nick", user.screen_name)
 
     # We want mentions to highlight.
     wc.buffer_set(buf, "highlight_words", user.screen_name)
@@ -678,6 +681,9 @@ def setup_timeline(timelined, followed=False, search=False):
         tlid[prefix] = "timelined"
     else:
         tlid[prefix] = prefix
+
+    wc.hook_signal_send("logger_backlog",
+            wc.WEECHAT_HOOK_SIGNAL_POINTER, buf)
 
 if wc.register(SCRIPT_NAME, SCRIPT_AUTHOR, SCRIPT_VERSION, SCRIPT_LICENSE,
         SCRIPT_DESC, "shutdown_cb", ""):

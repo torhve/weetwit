@@ -45,7 +45,7 @@ except ImportError:
 
 SCRIPT_NAME         = "weetwit"
 SCRIPT_AUTHOR       = "Daniël Franke <daniel@ams-sec.org>"
-SCRIPT_VERSION      = "0.10.1"
+SCRIPT_VERSION      = "0.10.2"
 SCRIPT_LICENSE      = "BSD"
 SCRIPT_DESC         = "Full twitter suite for Weechat."
 
@@ -121,6 +121,7 @@ def is_attached():
     """
     Check if screen/tmux is attached.
     """
+    # Code generously donated by Tor Hveem, relicensed to BSD with permission.
     sock = False
     if 'STY' in os.environ.keys():
         # We're in screen

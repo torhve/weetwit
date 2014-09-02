@@ -64,6 +64,19 @@ class Tweet(Status):
 
     def expand_urls(self, text):
         """Expands the URLs in the text."""
+
+        replace = {}
+        try:
+            for media in self.extended_entities.media:
+                if not replace[media.url]:
+                    replace[media.url] = {'expanded_url': media.expanded_url, urls: []}
+                replace[media.url]['urls'].append(media.url)
+
+            for url, media in replace.items():
+                text = text.replace(url, media.expanded_url + ' ' + ' '.join(media.urls))
+        except AttributeError:
+            pass
+
         try:
             url_list = self.retweeted_status.entities['urls']
         except AttributeError:
@@ -74,9 +87,9 @@ class Tweet(Status):
 
         for url in url_list:
             try:
-                replacement = "%s %s" % (url['display_url'], url['url'])
-                text = text.replace(url['url'], replacement)
+                text = text.replace(url['url'], url['expanded_url'])
             except (TypeError, KeyError):
                 pass
+
         return text
 
